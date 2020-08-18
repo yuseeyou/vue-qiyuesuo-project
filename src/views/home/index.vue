@@ -19,7 +19,7 @@
             text-align: center;
             padding-top: 50px;
             font-size: 25px;
-            color: #50a1f5;
+            color: @mainColor;
         }
     }
 </style>

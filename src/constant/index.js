@@ -185,3 +185,52 @@ export const initTableTitles = [
     {name: '使用印章', prop: 'sealNames'},
     {name: '详细操作数据', prop: 'detailedOperation'}
 ]
+
+//组织成员树的初始数据
+export const initEmployeeData = [
+    {
+        id: 1,
+        label: '一级 1',
+        value: 1,
+        children: [{
+            id: 4,
+            label: '二级 1-1',
+            value: 4,
+            children: [{
+                id: 9,
+                label: '三级 1-1-1',
+                value: 9
+            }, {
+                id: 10,
+                label: '三级 1-1-2',
+                value: 10
+            }]
+        }]
+    }, {
+        id: 2,
+        label: '一级 2',
+        value: 2,
+        children: [{
+            id: 5,
+            label: '二级 2-1',
+            value: 5
+        }, {
+            id: 6,
+            label: '二级 2-2',
+            value: 6
+        }]
+    }, {
+        id: 3,
+        label: '一级 3',
+        value: 3,
+        children: [{
+            id: 7,
+            label: '二级 3-1',
+            value: 7
+        }, {
+            id: 8,
+            label: '二级 3-2',
+            value: 8
+        }]
+    }
+]

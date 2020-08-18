@@ -81,9 +81,10 @@
         methods: {
             //1.获取表格中的数据
             async getTableData() {
-                const result = await httpGet('api/system/audit/list', this.queryForm)
-                this.tableData = result?.data?.result?.result;
-                this.totalDataNum = result?.data?.result?.totalCount;
+                const tableData = await httpGet('api/system/audit/list', this.queryForm);
+                const {result, totalCount} = tableData?.data?.result;
+                this.tableData = result;
+                this.totalDataNum = totalCount;
                 this.loading = false;
             },
             //2.控制表格行的展开和收起

@@ -6,12 +6,10 @@ const menu = {
         isOpenMenu: true
     },
     mutations: {
-        [CHANGEMENUSTATE](state:any):void {
+        [CHANGEMENUSTATE](state: any): void {
             state.isOpenMenu = !state.isOpenMenu;
         }
-    },
-    actions: {},
-    getters: {}
+    }
 }
 
 export default menu

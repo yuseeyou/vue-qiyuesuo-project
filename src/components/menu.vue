@@ -110,7 +110,7 @@
                 }
 
                 .el-menu-item.is-active {
-                    background-color: #2489f2 !important;
+                    background-color: @mainColor !important;
                     opacity: 1;
                 }
 
@@ -124,7 +124,7 @@
                     }
 
                     .is-active {
-                        background-color: #2489f2 !important;
+                        background-color: @mainColor !important;
                         opacity: 1;
                     }
                 }

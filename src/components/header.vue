@@ -171,7 +171,7 @@
                     line-height: 0;
                     width: 150px;
                     border-radius: 40px;
-                    background-color: #2489f2;
+                    background-color: @mainColor;
 
                     &:hover {
                         background-color: #50a1f5;
@@ -223,7 +223,7 @@
 
                     &:hover {
                         background-color: rgba(224, 224, 224, 0.5);
-                        color: #2489f2;
+                        color: @mainColor;
                     }
                 }
             }

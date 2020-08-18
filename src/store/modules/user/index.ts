@@ -14,12 +14,13 @@ interface contextFormat {
     [propName: string]: any
 }
 
+
 const user = {
     namespaced: true,
     state: {
-        isLogin: false,  // 用户是否登陆
-        userToken: '',   // 用户token
-        user: ''         // 用户详细信息
+        isLogin: JSON.parse(localStorage.getItem('isLogin') || 'false'),   // 用户是否登陆
+        userToken: localStorage.getItem('userToken') || '',   // 用户token
+        userInfo: JSON.parse(localStorage.getItem('userInfo') || '{}'),   // 用户详细信息
     },
     mutations: {
         [SETUSERTOKEN](state: any, payload: any) {
@@ -27,12 +28,12 @@ const user = {
             state.isLogin = true;
         },
         [SETUSERINFO](state: any, payload: any) {
-            state.user = payload;
+            state.userInfo = payload;
         },
         [LOGOUT](state: any) {
             state.isLogin = false;
             state.userToken = "";
-            state.user = '';
+            state.userInfo = {};
         }
     },
     actions: {
@@ -60,8 +61,14 @@ const user = {
                 handelError(result?.data?.message);
             }
         }
-    },
-    getters: {}
+    }
 }
+
+//解决vuex刷新数据丢失问题
+window.addEventListener("beforeunload", () => {
+    localStorage.setItem("isLogin", JSON.stringify(user.state.isLogin));
+    localStorage.setItem("userToken", user.state.userToken);
+    localStorage.setItem("userInfo", JSON.stringify(user.state.userInfo));
+})
 
 export default user

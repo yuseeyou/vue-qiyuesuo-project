@@ -1,7 +1,7 @@
 <template>
     <div class="search-contain">
         <div class="search-top">
-            <h4>{{currentTitle}}</h4>
+            <h4>{{searchInfo.title}}</h4>
             <span>操作日志导出</span>
         </div>
         <div class="search-content">
@@ -32,8 +32,8 @@
                                    :key="item.operation"></el-option>
                     </el-select>
                 </el-form-item>
-                <el-form-item label="搜索：" prop="searchValue" v-if="currentTitleKeyWords!=='ACCOUNT'">
-                    <el-input v-model="searchForm.searchValue" :placeholder="searchPlaceholder"></el-input>
+                <el-form-item label="搜索：" prop="searchValue" v-if="searchInfo.keywords!=='ACCOUNT'">
+                    <el-input v-model="searchForm.keywords" :placeholder="searchInfo.searchPlaceholder"></el-input>
                 </el-form-item>
                 <el-form-item>
                     <el-button type="primary" @click="submitForm('ruleForm')">搜索</el-button>
@@ -52,25 +52,26 @@
         name: "search",
         data() {
             return {
-                currentTitle: '电子签约文件',
-                currentTitleKeyWords: 'CONTRACT',
-                searchPlaceholder: '印章名称/签约文件主题',
+                searchInfo: {
+                    title: '电子签约文件',                   //搜索对应的大标题
+                    keywords: "CONTRACT",                  //多选框内容对应的关键词
+                    searchPlaceholder: '印章名称/签约文件主题' //搜索组件中搜索框的placeholder
+                },
                 searchForm: {
                     searchTime: '',
                     operator: '',
                     operation: '',
-                    searchValue: ""
+                    keywords: ""
                 },
-                operators: [],
-                operations: []
+                operators: [],  //操作人
+                operations: []  //操作类型
             }
         },
         mounted() {
             //监听点击了左边的菜单栏
             this.$bus.$on('receiveMenuProps', (item) => {
-                this.currentTitle = item.title;  //修改搜索组件大标题
-                this.currentTitleKeyWords = item.keywords; //修改搜索组件多选框内容对应的关键词
-                this.searchPlaceholder = item.searchPlaceholder; //修改搜索组件中搜索框的placeholder
+                const {title, keywords, searchPlaceholder} = item;
+                this.searchInfo = {title, keywords, searchPlaceholder}
                 this.getSearchInfo();
                 this.resetForm('form'); //切换左边菜单清空上次搜索内容
             })
@@ -80,18 +81,20 @@
             // 1.获取搜索里面的内容
             async getSearchInfo() {
                 const result = await httpGet('api/system/audit/operation', {
-                    auditType: this.currentTitleKeyWords,
+                    auditType: this.searchInfo.keywords,
                     companyId: '2697675620831965209'
                 });
-                this.operators = result?.data?.result?.operators;
-                this.operations = result?.data?.result?.operations;
+                const {operators, operations} = result?.data?.result;
+                this.operators = operators;
+                this.operations = operations;
             },
             // 2.提交搜索
             submitForm() {
+                const {operator, operation, keywords} = this.searchForm;
                 const finalSearchForm = {
-                    operator: this.searchForm.operator,
-                    operation: this.searchForm.operation,
-                    keyword: this.searchForm.searchValue,
+                    operator,
+                    operation,
+                    keywords,
                     createTimeFrom: this.searchForm.searchTime ? moment(this.searchForm.searchTime[0]).format('YYYY-MM-DD+HH:mm:ss') : '',
                     createTimeTo: this.searchForm.searchTime ? moment(this.searchForm.searchTime[1]).format('YYYY-MM-DD+HH:mm:ss') : ''
                 }

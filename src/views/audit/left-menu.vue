@@ -22,6 +22,7 @@
             }
         },
         methods: {
+            // 1.切换左边小菜单栏
             toggleMenu(item) {
                 this.$bus.$emit('receiveMenuProps', item);
             }
@@ -47,7 +48,7 @@
 
             .is-active {
                 background-color: #f7f8f8;
-                border-right: 2px solid #2489f2;
+                border-right: 2px solid @mainColor;
             }
         }
     }
