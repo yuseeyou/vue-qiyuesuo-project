@@ -2,6 +2,7 @@
     <div class="home-contain">
         <p>我是首页</p>
         <p>我是基础分支hotfix1.1</p>
+        <p>我是feature/1.1/REQ-001</p>
     </div>
 </template>
 
