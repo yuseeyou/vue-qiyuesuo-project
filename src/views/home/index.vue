@@ -1,6 +1,7 @@
 <template>
     <div class="home-contain">
         <p>我是首页</p>
+        <p>我是基础分支hotfix1.1</p>
     </div>
 </template>
 
