@@ -3,7 +3,7 @@
         <p>我是首页</p>
         <p>我是基础分支hotfix1.1</p>
         <p>我是分支feature/1.1/REQ-002</p>
-        <p>我在REQ-001上增加了一段话</p>
+        <p>fix a bug</p>
     </div>
 </template>
 
