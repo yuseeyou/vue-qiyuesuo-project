@@ -13,7 +13,8 @@
         data(){
             return{
                 msg:'hello vue',
-                age:23
+                age:23,
+                list:[1,2,3]
             }
         }
     }
