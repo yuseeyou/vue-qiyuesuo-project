@@ -105,8 +105,11 @@
             },
             // 2.登出
             logout() {
-                this.doLogout();
-                this.$router.push({name: "Login"});
+                this.doLogout().then(res => {
+                    if (res?.data?.code === 0) {
+                        this.$router.push({name: "Login"});
+                    }
+                })
             },
             // 3.修改颜色
             colorChanged() {

@@ -51,15 +51,17 @@ const user = {
             } else {
                 handelError(result?.data?.message);
             }
+            return result
         },
         //登出
         async [DOLOGOUT](context: contextFormat, payload: userForm) {
             const result = await httpPost('api/logout');
             if (result?.data?.code === 0) {
-                context.commit(LOGOUT)
+                context.commit(LOGOUT);
             } else {
                 handelError(result?.data?.message);
             }
+            return result
         }
     }
 }

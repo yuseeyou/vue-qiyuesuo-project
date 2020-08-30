@@ -54,14 +54,6 @@
                 }
             };
         },
-        watch: {
-            // 监听用户登录状态
-            "isLogin": function () {
-                if (this.isLogin) {
-                    this.$router.push({name: 'Home'});
-                }
-            }
-        },
         computed: {
             ...mapState('user', ["isLogin"])
         },
@@ -73,9 +65,11 @@
                         if (this.loginForm.password === "Qiyuesuo#2020") {
                             this.loginForm.password = '{cipher}qgDS6XetVCvFxYEtDdx8OlJyjRScQ1EgL6sYUXALYUJenEyyWEhCTimIs/ClfyNw+Jw/uXrqK8ImjeFfZoUQMzVBFkCo7Y4eg6fwmOUHSA+HkFKsoI+oMnKkPu5eUZS9LE3aZcMkDa4qwvMbrCIhE5OHS2ImlrI2Y3nvrXR7zBs=';
                         }
-                        this.doLogin(this.loginForm);
-                    } else {
-                        return false;
+                        this.doLogin(this.loginForm).then(res => {
+                            if (res?.data?.code === 0) {
+                                this.$router.push({name: 'Home'})
+                            }
+                        })
                     }
                 });
             },
