@@ -12,7 +12,8 @@
         name: "home",
         data(){
             return{
-                msg:'hello vue'
+                msg:'hello vue',
+                age:23
             }
         }
     }
