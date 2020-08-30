@@ -9,7 +9,12 @@
 
 <script>
     export default {
-        name: "home"
+        name: "home",
+        data(){
+            return{
+                msg:'hello vue'
+            }
+        }
     }
 </script>
 
